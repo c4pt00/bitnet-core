@@ -16,7 +16,7 @@
  * for both bitcoind and bitcoin-qt, to make it harder for attackers to
  * target servers or GUI users specifically.
  */
-const std::string CLIENT_NAME("Bitnet IO 70037 QTUM");
+const std::string CLIENT_NAME("Bitnet IO 70038 QTUM");
 
 
 #ifdef HAVE_BUILD_INFO
@@ -93,7 +93,7 @@ std::string CopyrightHolders(const std::string& strPrefix)
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/qtumproject/qtum>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/c4pt00/bitnet-core>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i").translated, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
@@ -103,7 +103,7 @@ std::string LicenseInfo()
            strprintf(_("The source code is available from %s.").translated, URL_SOURCE_CODE) +
            "\n" +
            "\n" +
-           _("This is experimental software.").translated + "\n" +
+           _("This is experimental software. rebuilt by dhweinberg (founder) originally from Litecoin/Dogecoin/Bitcoin then incorporated QTUM").translated + "\n" +
            strprintf(_("Distributed under the MIT software license, see the accompanying file %s or %s").translated, "COPYING", "<https://opensource.org/licenses/MIT>") +
            "\n";
 }

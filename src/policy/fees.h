@@ -159,9 +159,9 @@ private:
     static constexpr double DOUBLE_SUCCESS_PCT = .95;
 
     /** Require an avg of 0.1 tx in the combined feerate bucket per block to have stat significance */
-    static constexpr double SUFFICIENT_FEETXS = 0.1;
+    static constexpr double SUFFICIENT_FEETXS = 0.01;
     /** Require an avg of 0.5 tx when using short decay since there are fewer blocks considered*/
-    static constexpr double SUFFICIENT_TXS_SHORT = 0.5;
+    static constexpr double SUFFICIENT_TXS_SHORT = 0.05;
 
     /** Minimum and Maximum values for tracking feerates
      * The MIN_BUCKET_FEERATE should just be set to the lowest reasonable feerate we
@@ -170,7 +170,7 @@ private:
      * invalidates old estimates files. So leave it at 1000 unless it becomes
      * necessary to lower it, and then lower it substantially.
      */
-    static constexpr double MIN_BUCKET_FEERATE = 1000;
+    static constexpr double MIN_BUCKET_FEERATE = 10;
     static constexpr double MAX_BUCKET_FEERATE = 1e7;
 
     /** Spacing of FeeRate buckets
@@ -178,7 +178,7 @@ private:
      * to give accurate estimates over a large range of potential feerates
      * Therefore it makes sense to exponentially space the buckets
      */
-    static constexpr double FEE_SPACING = 1.05;
+    static constexpr double FEE_SPACING = 1.1;
 
     const fs::path m_estimation_filepath;
 public:

@@ -53,11 +53,11 @@ The most troublefree and reproducable method of building the repository is via t
     ./autogen.sh
 
     CPPFLAGS="-w -fcompare-debug-second" CXXFLAGS="-w -fcompare-debug-second" LDFLAGS="-w -fcompare-debug-second" CONFIG_SITE=$PWD/depends/x86_64-unknown-linux-gnu/share/config.site ./configure \
-    --prefix=$PWD/bitnet-shared-linux --disable-tests --disable-bench --disable-fuzz-binary
+    --prefix=$PWD/bitnet-shared-linux --disable-tests --disable-bench --disable-fuzz-binary --enable-multiprocess
 
    for ubuntu 18.04 
   CPPFLAGS="-w -fcompare-debug-second -static-libstdc++" CXXFLAGS="-w -fcompare-debug-second -static-libstdc++" LDFLAGS="-w -fcompare-debug-second -static-libstdc++" CONFIG_SITE=$PWD/depends/x86_64-unknown-linux-gnu/share/config.site ./configure \
-    --prefix=$PWD/bitnet-70037-ubu1804-linux --disable-tests --disable-bench --disable-fuzz-binary 
+    --prefix=$PWD/bitnet-70037-ubu1804-linux --disable-tests --disable-bench --disable-fuzz-binary --enable-multiprocess
 
 
     make -j24 				# -j8 for 8 cores adjust here

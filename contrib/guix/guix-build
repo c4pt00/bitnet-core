@@ -129,11 +129,13 @@ for host in $HOSTS; do
         *darwin*)
             OSX_SDK="$(make -C "${PWD}/depends" --no-print-directory HOST="$host" print-OSX_SDK | sed 's@^[^=]\+=@@g')"
             if [ -e "$OSX_SDK" ]; then
-                echo "Found macOS SDK at '${OSX_SDK}', using..."
-                break
+   #             echo "Found macOS SDK at '${OSX_SDK}', using..."
+  #              break
+		echo "this isnt macos"
             else
-                echo "macOS SDK does not exist at '${OSX_SDK}', please place the extracted, untarred SDK there to perform darwin builds, or define SDK_PATH environment variable. Exiting..."
-                exit 1
+              #  echo "macOS SDK does not exist at '${OSX_SDK}', please place the extracted, untarred SDK there to perform darwin builds, or define SDK_PATH environment variable. Exiting..."
+               # exit 1
+		continue
             fi
             ;;
     esac
