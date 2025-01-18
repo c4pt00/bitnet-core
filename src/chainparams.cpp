@@ -106,10 +106,22 @@ public:
 
 
 
+// 70038
+/*
+      
         consensus.powLimit = uint256S      ("000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.posLimit = uint256S      ("0000000000000000ffff0ffffffffffffffffffffffffffffffffffffffffffff"); //added 3 0s for difficulty 01-02-2025
-        consensus.QIP9PosLimit = uint256S  ("0000000000000000ffff0ffffffffffffffffffffffffffffffffffffffffffff"); // The new POS-limit activated after QIP9
-        consensus.RBTPosLimit = uint256S   ("0000000000000000ffff0ffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.powLimit = uint256S      ("000000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.posLimit = uint256S      ("00000000000000ffff0ffffffffffffffffffffffffffffffffffffffffffffff"); //added one 0s for difficulty 01-03-2025
+        consensus.QIP9PosLimit = uint256S  ("00000000000000ffff0ffffffffffffffffffffffffffffffffffffffffffffff"); // The new POS-limit activated after QIP9
+        consensus.RBTPosLimit = uint256S   ("00000000000000ffff0ffffffffffffffffffffffffffffffffffffffffffffff");
+*/
+
+  //70039
+        consensus.powLimit = uint256S      ("000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.posLimit = uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.QIP9PosLimit = uint256S("0000000000001fffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.RBTPosLimit = uint256S("0000000000003fffffffffffffffffffffffffffffffffffffffffffffffffff");
+
 
 
 
@@ -150,7 +162,7 @@ public:
         pchMessageStart[1] = 0xe1;
         pchMessageStart[2] = 0xd1;
         pchMessageStart[3] = 0xe1;
-        nDefaultPort = 13333;
+        nDefaultPort = 8888;
         nPruneAfterHeight = 6000000;
         m_assumed_blockchain_size = 21;
         m_assumed_chain_state_size = 6;

@@ -64,7 +64,7 @@ static_assert (MAX_BLOCK_RELAY_ONLY_ANCHORS <= static_cast<size_t>(MAX_BLOCK_REL
 const char* const ANCHORS_DATABASE_FILENAME = "anchors.dat";
 
 // How often to dump addresses to peers.dat
-static constexpr std::chrono::minutes DUMP_PEERS_INTERVAL{15};
+static constexpr std::chrono::seconds DUMP_PEERS_INTERVAL{5};
 
 /** Number of DNS seeds to query when the number of connections is low. */
 static constexpr int DNSSEEDS_TO_QUERY_AT_ONCE = 3;
@@ -78,15 +78,15 @@ static constexpr int DNSSEEDS_TO_QUERY_AT_ONCE = 3;
  * little longer trying to connect to known peers before querying the
  * DNS seeds.
  */
-static constexpr std::chrono::seconds DNSSEEDS_DELAY_FEW_PEERS{11};
-static constexpr std::chrono::minutes DNSSEEDS_DELAY_MANY_PEERS{5};
+static constexpr std::chrono::seconds DNSSEEDS_DELAY_FEW_PEERS{5};
+static constexpr std::chrono::minutes DNSSEEDS_DELAY_MANY_PEERS{1};
 static constexpr int DNSSEEDS_DELAY_PEER_THRESHOLD = 1000; // "many" vs "few" peers
 
 /** The default timeframe for -maxuploadtarget. 1 day. */
 static constexpr std::chrono::seconds MAX_UPLOAD_TIMEFRAME{60 * 60 * 24};
 
 // A random time period (0 to 1 seconds) is added to feeler connections to prevent synchronization.
-static constexpr auto FEELER_SLEEP_WINDOW{1s};
+static constexpr auto FEELER_SLEEP_WINDOW{2s};
 
 /** Used to pass flags to the Bind() function */
 enum BindFlags {
@@ -102,7 +102,7 @@ enum BindFlags {
 
 // The set of sockets cannot be modified while waiting
 // The sleep time needs to be small to avoid new sockets stalling
-static const uint64_t SELECT_TIMEOUT_MILLISECONDS = 50;
+static const uint64_t SELECT_TIMEOUT_MILLISECONDS = 500;
 
 const std::string NET_MESSAGE_TYPE_OTHER = "*other*";
 
@@ -1479,7 +1479,7 @@ void CConnman::ThreadDNSAddressSeed()
         if (!fNetworkActive) {
             LogPrintf("Waiting for network to be reactivated before querying DNS seeds.\n");
             do {
-                if (!interruptNet.sleep_for(std::chrono::seconds{1})) return;
+                if (!interruptNet.sleep_for(std::chrono::seconds{5})) return;
             } while (!fNetworkActive);
         }
 
@@ -1611,11 +1611,11 @@ void CConnman::ThreadOpenConnections(const std::vector<std::string> connect)
                 OpenNetworkConnection(addr, false, nullptr, strAddr.c_str(), ConnectionType::MANUAL);
                 for (int i = 0; i < 10 && i < nLoop; i++)
                 {
-                    if (!interruptNet.sleep_for(std::chrono::milliseconds(500)))
+                    if (!interruptNet.sleep_for(std::chrono::seconds(2)))
                         return;
                 }
             }
-            if (!interruptNet.sleep_for(std::chrono::milliseconds(500)))
+            if (!interruptNet.sleep_for(std::chrono::milliseconds(2000)))
                 return;
         }
     }
@@ -1637,7 +1637,7 @@ void CConnman::ThreadOpenConnections(const std::vector<std::string> connect)
     {
         ProcessAddrFetch();
 
-        if (!interruptNet.sleep_for(std::chrono::milliseconds(500)))
+        if (!interruptNet.sleep_for(std::chrono::milliseconds(2000)))
             return;
 
         CSemaphoreGrant grant(*semOutbound);
@@ -1651,7 +1651,7 @@ void CConnman::ThreadOpenConnections(const std::vector<std::string> connect)
             // 60 seconds for any of those sources to populate addrman.
             bool add_fixed_seeds_now = false;
             // It is cheapest to check if enough time has passed first.
-            if (GetTime<std::chrono::seconds>() > start + std::chrono::seconds{2}) {
+            if (GetTime<std::chrono::seconds>() > start + std::chrono::seconds{5}) {
                 add_fixed_seeds_now = true;
                 LogPrintf("Adding fixed seeds as addrman is empty\n");
             }
