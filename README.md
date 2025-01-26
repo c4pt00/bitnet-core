@@ -75,6 +75,8 @@ The most troublefree and reproducable method of building the repository is via t
     apt install build-essential libtool autotools-dev automake pkg-config \
     bsdmainutils curl git nsis nano sudo g++-mingw-w64-x86-64 -y
 
+
+    # update compiler to use posix threads for mingw executables
     update-alternatives --config x86_64-w64-mingw32-gcc
     update-alternatives --config x86_64-w64-mingw32-g++
 
