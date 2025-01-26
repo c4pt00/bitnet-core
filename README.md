@@ -73,7 +73,7 @@ The most troublefree and reproducable method of building the repository is via t
     apt-get update -y
 
     apt install build-essential libtool autotools-dev automake pkg-config \
-    bsdmainutils curl git nsis nano sudo g++-mingw-w64-x86-64-posix -y
+    bsdmainutils curl git nsis nano sudo g++-mingw-w64-x86-64 -y
 
     cd depends
     make -j8 HOST=x86_64-w64-mingw32	# -j8 for 8 cores adjust here
