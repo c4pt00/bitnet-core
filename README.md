@@ -1,3 +1,5 @@
+# 01-30-2025
+no snow...only sunshine everyday
 
 * to disable staking for pools or exchanges (use)
 * bitnet-qt.exe -staking=false
