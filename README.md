@@ -3,6 +3,11 @@
 * bitnet-qt.exe -staking=false
 * bitnet-qt -staking=false
 
+
+https://31.220.103.129/
+
+https://66.94.121.198/
+
 bitnet-io staging tree 24.x
 ===========================
 
